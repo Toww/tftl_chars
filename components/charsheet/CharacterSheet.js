@@ -3,13 +3,17 @@ import { useContext } from "react";
 
 // Contexts
 import { AttributesContext } from "contexts/AttributesContext";
+import { ConditionsContext } from "contexts/ConditionsContext";
+import { SkillsContext } from "contexts/SkillsContext";
 
 // UI Components
 import StripedList from "./StripedList";
 
 const CharacterSheet = () => {
   // Preparing Character info
-  const attributes = useContext(AttributesContext);
+  const { attributes, setAttributes } = useContext(AttributesContext);
+  const { conditions, setConditions } = useContext(ConditionsContext);
+  const { skills, setSkills } = useContext(SkillsContext);
 
   return (
     <>
@@ -29,7 +33,23 @@ const CharacterSheet = () => {
         {/* --- Left Column --- */}
         <div className="lg:col-span-1">
           {/* Attributes */}
-          <StripedList title="Attributes" listObject={attributes} />;
+          <StripedList
+            title="Attributes"
+            listObject={attributes}
+            setListObject={setAttributes}
+          />
+          {/* Conditions */}
+          <StripedList
+            title="Conditions"
+            listObject={conditions}
+            setListObject={setConditions}
+          />
+          {/* Skills */}
+          <StripedList
+            title="Skills"
+            listObject={skills}
+            setListObject={setSkills}
+          />
         </div>
         {/* --- Right Column --- */}
         <div className="lg:col-span-2"></div>

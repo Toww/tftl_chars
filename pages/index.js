@@ -1,6 +1,12 @@
 import Head from "next/head";
+
+// Components
 import CharacterSheet from "components/charsheet/CharacterSheet";
+
+// Providers
 import AttributesContextProvider from "contexts/AttributesContext";
+import ConditionsContextProvider from "contexts/ConditionsContext";
+import SkillsContextProvider from "contexts/SkillsContext";
 
 export default function Home() {
   return (
@@ -12,7 +18,11 @@ export default function Home() {
 
       <main>
         <AttributesContextProvider>
-          <CharacterSheet />
+          <ConditionsContextProvider>
+            <SkillsContextProvider>
+              <CharacterSheet />
+            </SkillsContextProvider>
+          </ConditionsContextProvider>
         </AttributesContextProvider>
       </main>
     </div>

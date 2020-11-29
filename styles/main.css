@@ -12,6 +12,10 @@
 /* Write your own custom component styles here */
 
 /* -- Info block -- */
+.info-block {
+  @apply mb-4
+}
+
 .info-block h1 {
   @apply text-white font-black uppercase block bg-black py-3 px-4 w-full;
 }
@@ -21,7 +25,7 @@
 }
 
 .c-list input {
-  @apply w-16 h-8 border border-gray-300;
+  @apply w-16 h-8 border border-gray-300 px-2 text-sm text-right;
 }
 
 .c-list li {

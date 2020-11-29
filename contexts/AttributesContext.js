@@ -11,7 +11,7 @@ const AttributesContextProvider = ({ children }) => {
   ]);
 
   return (
-    <AttributesContext.Provider value={attributes}>
+    <AttributesContext.Provider value={{attributes, setAttributes}}>
       {children}
     </AttributesContext.Provider>
   );
