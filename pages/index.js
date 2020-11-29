@@ -1,15 +1,19 @@
 import Head from "next/head";
+import CharacterSheet from "components/charsheet/CharacterSheet";
+import AttributesContextProvider from "contexts/AttributesContext";
 
 export default function Home() {
   return (
     <div>
       <Head>
-        <title>Create Next App</title>
+        <title>Tales From The Loop Characters</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
-        <div className="text-xl text-red-500">Hello Tailwind CSS!</div>
+        <AttributesContextProvider>
+          <CharacterSheet />
+        </AttributesContextProvider>
       </main>
     </div>
   );

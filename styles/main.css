@@ -1,3 +1,6 @@
+/* // Importing fonts */
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap");
+
 @tailwind base;
 
 /* Write your own custom base styles here */
@@ -8,6 +11,30 @@
 
 /* Write your own custom component styles here */
 
+/* -- Info block -- */
+.info-block h1 {
+  @apply text-white font-black uppercase block bg-black py-3 px-4 w-full;
+}
+
+.c-list {
+  @apply bg-orange-50 font-bold border border-gray-300;
+}
+
+.c-list input {
+  @apply w-16 h-8 border border-gray-300;
+}
+
+.c-list li {
+  @apply h-12 flex justify-between items-center px-4 border-b border-gray-300;
+}
+
+.c-list li:last-child {
+  @apply border-none;
+}
+
+.c-striped li:nth-of-type(even) {
+  @apply bg-orange-100;
+}
 /* Start purging... */
 @tailwind utilities;
 /* Stop purging. */
