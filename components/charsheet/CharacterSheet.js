@@ -1,20 +1,13 @@
 import Image from "next/image";
-import { useContext } from "react";
-
-// Contexts
-import { AttributesContext } from "contexts/AttributesContext";
-import { ConditionsContext } from "contexts/ConditionsContext";
-import { SkillsContext } from "contexts/SkillsContext";
 
 // UI Components
-import StripedList from "./StripedList";
+import MainInfo from "components/charsheet/MainInfo";
+import Attributes from "components/charsheet/Attributes";
+import Conditions from "components/charsheet/Conditions";
+import Skills from "components/charsheet/Skills";
+import Experience from "components/charsheet/Experience";
 
 const CharacterSheet = () => {
-  // Preparing Character info
-  const { attributes, setAttributes } = useContext(AttributesContext);
-  const { conditions, setConditions } = useContext(ConditionsContext);
-  const { skills, setSkills } = useContext(SkillsContext);
-
   return (
     <>
       {/* --- Page Header --- */}
@@ -32,27 +25,15 @@ const CharacterSheet = () => {
       <main className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* --- Left Column --- */}
         <div className="lg:col-span-1">
-          {/* Attributes */}
-          <StripedList
-            title="Attributes"
-            listObject={attributes}
-            setListObject={setAttributes}
-          />
-          {/* Conditions */}
-          <StripedList
-            title="Conditions"
-            listObject={conditions}
-            setListObject={setConditions}
-          />
-          {/* Skills */}
-          <StripedList
-            title="Skills"
-            listObject={skills}
-            setListObject={setSkills}
-          />
+          <Attributes />
+          <Conditions />
+          <Skills />
+          <Experience />
         </div>
         {/* --- Right Column --- */}
-        <div className="lg:col-span-2"></div>
+        <div className="lg:col-span-2">
+          <MainInfo />
+        </div>
       </main>
     </>
   );

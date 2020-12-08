@@ -7,6 +7,8 @@ import CharacterSheet from "components/charsheet/CharacterSheet";
 import AttributesContextProvider from "contexts/AttributesContext";
 import ConditionsContextProvider from "contexts/ConditionsContext";
 import SkillsContextProvider from "contexts/SkillsContext";
+import ExperienceContextProvider from "contexts/ExperienceContext";
+import MainInfoContextProvider from "contexts/MainInfoContext";
 
 export default function Home() {
   return (
@@ -20,7 +22,11 @@ export default function Home() {
         <AttributesContextProvider>
           <ConditionsContextProvider>
             <SkillsContextProvider>
-              <CharacterSheet />
+              <ExperienceContextProvider>
+                <MainInfoContextProvider>
+                  <CharacterSheet />
+                </MainInfoContextProvider>
+              </ExperienceContextProvider>
             </SkillsContextProvider>
           </ConditionsContextProvider>
         </AttributesContextProvider>

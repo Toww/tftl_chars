@@ -15,8 +15,7 @@ const StripedList = ({ title, listObject, setListObject }) => {
   return (
     <div className="info-block">
       <h1>{title}</h1>
-
-      <ul className="c-list c-striped">
+      <ul className="c-striped-list">
         {listObject.map((attr, objIndex) => (
           <li key={`${title}-${attr.type}`}>
             <label>{attr.title}</label>
