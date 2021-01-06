@@ -8,7 +8,7 @@ const Experience = () => {
 
   return (
     <div className="info-block">
-      <h1>Experience</h1>
+      <h1 className="block-title">Experience</h1>
       <BoxList
         title="experience"
         listObject={experience}

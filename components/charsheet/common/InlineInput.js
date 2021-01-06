@@ -19,8 +19,8 @@ const InlineInput = ({ title, relState, relStateSetter, colSpan }) => {
           <input
             className="h-8 flex-grow border-b border-gray-300 bg-transparent ml-3"
             type="text"
-            name="name"
-            id="name"
+            name={title}
+            id={title}
             // if value is set to 0 show an empty box
             value={relState.text}
             onChange={(e) =>
@@ -50,8 +50,8 @@ const InlineInput = ({ title, relState, relStateSetter, colSpan }) => {
         <input
           className="h-8 flex-grow border-b border-gray-300 bg-transparent ml-3"
           type="text"
-          name="name"
-          id="name"
+          name={title}
+          id={title}
           // if value is set to 0 show an empty box
           value={relState}
           onChange={(e) => relStateSetter(e.target.value)}
@@ -70,7 +70,7 @@ const InlineInput = ({ title, relState, relStateSetter, colSpan }) => {
         colSpan === "1" ? "col-span-2 md:col-span-1" : "col-span-2"
       }`}
     >
-      <label className="uppercase font-bold text-xs align-top">{title}:</label>
+      <label className="input-title">{title}:</label>
       {handleInput()}
     </div>
   );

@@ -14,12 +14,13 @@ const StripedList = ({ title, listObject, setListObject }) => {
 
   return (
     <div className="info-block">
-      <h1>{title}</h1>
+      <h1 className="block-title">{title}</h1>
       <ul className="c-striped-list">
         {listObject.map((attr, objIndex) => (
           <li key={`${title}-${attr.type}`}>
             <label>{attr.title}</label>
             <input
+            className="box-input"
               type="text"
               name={attr.type}
               id={attr.type}

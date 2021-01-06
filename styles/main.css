@@ -16,17 +16,13 @@
   @apply mb-4 bg-orange-50;
 }
 
-.info-block h1 {
+.block-title {
   @apply text-white font-black uppercase block bg-gray-900 py-3 px-4 w-full;
 }
 
 /* -- Striped list -- */
 .c-striped-list {
   @apply font-bold border border-gray-300;
-}
-
-.c-striped-list input {
-  @apply w-16 h-8 border border-gray-300 px-2 text-sm text-right;
 }
 
 .c-striped-list li {
@@ -41,6 +37,32 @@
   @apply bg-orange-100;
 }
 
+.c-list {
+  @apply font-bold border border-gray-300;
+}
+
+.line-input {
+  @apply h-8 flex-grow border-b border-gray-300 bg-transparent mx-3;
+}
+
+.box-input {
+  @apply w-16 h-8 border border-gray-300 px-2 text-sm text-right;
+}
+.input-title {
+  @apply uppercase font-bold text-xs align-top;
+}
+
+.ruled-textarea {
+  @apply w-full resize-none overflow-hidden;
+  line-height: 48px; /* line-height specified for the background linear-gradient to fit */
+  padding-top: 5px;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 47px,
+    #d1d5db 48px
+  );
+}
 
 /* Start purging... */
 @tailwind utilities;
