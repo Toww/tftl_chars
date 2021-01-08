@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, memo } from "react";
 import { RelationshipsContext } from "contexts/RelationshipsContext";
 
 const Relationships = () => {
@@ -18,7 +18,7 @@ const Relationships = () => {
 
   return (
     <div className="info-block">
-      <h1 className="block-title">Relationships</h1>
+      <h1 className="block-title">Relationships - {Math.random()}</h1>
       <ul className="c-list">
         {relationships.map((rel, index) => (
           <li key={rel.title} className="flex items-center flex-grow px-4 py-2">
@@ -40,4 +40,4 @@ const Relationships = () => {
   );
 };
 
-export default Relationships;
+export default memo(Relationships);

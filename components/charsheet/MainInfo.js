@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, memo } from "react";
 import { MainInfoContext } from "contexts/MainInfoContext";
 import InlineInput from "./common/InlineInput";
 
@@ -43,4 +43,4 @@ const MainInfo = () => {
   );
 };
 
-export default MainInfo;
+export default memo(MainInfo);

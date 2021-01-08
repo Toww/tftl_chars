@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, memo } from "react";
 import { ItemsContext } from "contexts/ItemsContext";
 
 const Items = () => {
@@ -19,7 +19,7 @@ const Items = () => {
 
   return (
     <div className="info-block mb-0">
-      <h1 className="block-title">Items</h1>
+      <h1 className="block-title">Items - {Math.random()}</h1>
       <ul className="c-list">
         {items.map((item, index) => (
           <li
@@ -27,7 +27,7 @@ const Items = () => {
             className="flex flex-col px-4 py-2"
           >
             {index === 0 ? (
-              <label className="text-xs uppercase">Iconic item</label>
+              <label className="text-xs uppercase">Iconic item </label>
             ) : (
               ""
             )}
@@ -60,4 +60,4 @@ const Items = () => {
   );
 };
 
-export default Items;
+export default memo(Items);
