@@ -16,7 +16,7 @@ import Notes from "components/charsheet/Notes";
 import { AttributesContext } from "contexts/AttributesContext";
 import { ConditionsContext } from "contexts/ConditionsContext";
 import { SkillsContext } from "contexts/SkillsContext";
-import { ExperienceContext } from "contexts/ExperienceContext";
+import { ExperienceContext } from "contexts/ExperienceContext"; 
 import { MainInfoContext } from "contexts/MainInfoContext";
 import { RelationshipsContext } from "contexts/RelationshipsContext";
 import { ItemsContext } from "contexts/ItemsContext";
@@ -123,3 +123,9 @@ const CharacterSheet = () => {
 };
 
 export default CharacterSheet;
+
+
+// export async function getServerSideProps(context) => {
+//   let character = await 
+
+// }
