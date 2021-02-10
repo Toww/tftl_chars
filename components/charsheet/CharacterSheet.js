@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+const _ = require("lodash");
 
 // UI Components
 import MainInfo from "components/charsheet/MainInfo";
@@ -12,43 +13,79 @@ import Items from "components/charsheet/Items";
 import Hideout from "components/charsheet/Hideout";
 import Notes from "components/charsheet/Notes";
 
-// Importing data from contexts for the character object
+// COntexts
 import { AttributesContext } from "contexts/AttributesContext";
 import { ConditionsContext } from "contexts/ConditionsContext";
 import { SkillsContext } from "contexts/SkillsContext";
-import { ExperienceContext } from "contexts/ExperienceContext"; 
+import { ExperienceContext } from "contexts/ExperienceContext";
 import { MainInfoContext } from "contexts/MainInfoContext";
 import { RelationshipsContext } from "contexts/RelationshipsContext";
 import { ItemsContext } from "contexts/ItemsContext";
 import { HideoutContext } from "contexts/HideoutContext";
 import { NotesContext } from "contexts/NotesContext";
 
-const CharacterSheet = () => {
-  // Get data from respective contexts
-  const { attributes } = useContext(AttributesContext);
-  const { conditions } = useContext(ConditionsContext);
-  const { skills } = useContext(SkillsContext);
-  const { experience } = useContext(ExperienceContext);
+const CharacterSheet = ({ character }) => {
+  // Get every context variables
+  const { attributes, setAttributes } = useContext(AttributesContext);
+  const { conditions, setConditions } = useContext(ConditionsContext);
+  const { skills, setSkills } = useContext(SkillsContext);
+  const { experience, setExperience } = useContext(ExperienceContext);
   const {
     name,
+    setName,
     type,
+    setType,
     age,
+    setAge,
     luckPoints,
+    setLuckPoints,
     drive,
+    setDrive,
     anchor,
+    setAnchor,
     problem,
+    setProblem,
     pride,
+    setPride,
     description,
+    setDescription,
     favSong,
+    setFavSong,
   } = useContext(MainInfoContext);
-  const { relationships } = useContext(RelationshipsContext);
-  const { items } = useContext(ItemsContext);
-  const { hideout } = useContext(HideoutContext);
-  const { notes } = useContext(NotesContext);
+  const { relationships, setRelationships } = useContext(RelationshipsContext);
+  const { items, setItems } = useContext(ItemsContext);
+  const { hideout, setHideout } = useContext(HideoutContext);
+  const { notes, setNotes } = useContext(NotesContext);
 
+  // On component first load :
+  useEffect(() => {
+    if (character) {
+      // If a character was passed as a prop, set every context to be updated with its values
+      setAttributes(character.attributes);
+      setConditions(character.conditions);
+      setSkills(character.skills);
+      setExperience(character.experience);
+      setRelationships(character.relationships);
+      setItems(character.items);
+      setHideout(character.hideout);
+      setNotes(character.notes);
+      setName(character.mainInfo.name);
+      setType(character.mainInfo.type);
+      setAge(character.mainInfo.age);
+      setLuckPoints(character.mainInfo.luckPoints);
+      setDrive(character.mainInfo.drive);
+      setAnchor(character.mainInfo.anchor);
+      setProblem(character.mainInfo.problem);
+      setPride(character.mainInfo.pride);
+      setDescription(character.mainInfo.description);
+      setFavSong(character.mainInfo.favSong);
+    }
+  }, []);
+
+  // Submitting the character sheet form
   const handleSubmit = () => {
     // Character object grouping all data from contexts
-    const character = {
+    const charNewInfo = {
       attributes,
       conditions,
       skills,
@@ -71,7 +108,19 @@ const CharacterSheet = () => {
       },
     };
 
-    console.log(character);
+    // If a Character was passed as prop
+    if (character) {
+      // If there is a character passed as a prop, add its id to charNewInfo and check it
+      charNewInfo._id = character._id;
+
+      // Comparing the two objects using lodash to see if any modification
+      // was made on the character sheet since it was loaded from db.
+      const charValuesChanged = !_.isEqual(character, charNewInfo);
+
+      charValuesChanged
+        ? console.log("Sending updated char to db!")
+        : console.log("No modifications were made to the character sheet");
+    }
   };
 
   return (
@@ -123,9 +172,3 @@ const CharacterSheet = () => {
 };
 
 export default CharacterSheet;
-
-
-// export async function getServerSideProps(context) => {
-//   let character = await 
-
-// }
