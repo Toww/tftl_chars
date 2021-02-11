@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 
 const Layout = ({ children, title }) => {
   return (
@@ -12,12 +13,16 @@ const Layout = ({ children, title }) => {
       {/* --- Page Header --- */}
       <header className="max-w-lg mx-auto mb-8">
         {/* TFTL LOGO */}
-        <Image
-          src="/img/tftl-logo.png"
-          alt="Tales From The Loop logo"
-          width={800}
-          height={136}
-        />
+        <Link href="/">
+          <a>
+            <Image
+              src="/img/tftl-logo.png"
+              alt="Tales From The Loop logo"
+              width={800}
+              height={136}
+            />
+          </a>
+        </Link>
       </header>
       <main>{children}</main>
     </>

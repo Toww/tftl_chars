@@ -14,7 +14,7 @@ const StripedList = ({ title, listObject, setListObject }) => {
 
   return (
     <div className="info-block">
-      <h1 className="block-title">{title} - {Math.random()}</h1>
+      <h1 className="block-title">{title}</h1>
       <ul className="c-striped-list">
         {listObject.map((attr, objIndex) => (
           <li key={`${title}-${attr.type}`}>

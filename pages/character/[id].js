@@ -7,7 +7,7 @@ const Character = ({ character }) => {
   return (
     <div>
       <Layout title={`${character.mainInfo.name}`}>
-          <CharacterSheet character={character} />
+        <CharacterSheet character={character} />
       </Layout>
     </div>
   );
@@ -16,9 +16,14 @@ const Character = ({ character }) => {
 export default Character;
 
 // On every request to this page :
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  // Getting id slug from context
+  const {
+    params: { id },
+  } = context;
+
   // get the corresponding character from db
-  const character = await getCharFromDb("601c3a1fbd74cddeccf9f1a7");
+  const character = await getCharFromDb(id);
   // Pass data to the page via props
   return {
     props: {

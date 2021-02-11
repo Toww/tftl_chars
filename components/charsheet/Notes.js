@@ -7,7 +7,7 @@ const Notes = () => {
 
   return (
     <div className=" info-block flex flex-col mb-0">
-      <h1 className="block-title">Notes - {Math.random()}</h1>
+      <h1 className="block-title">Notes</h1>
       <div className="h-full px-4 pt-2 pb-4 bg-orange-50 border-b border-l border-r border-gray-300">
         <textarea
           rows="3"
