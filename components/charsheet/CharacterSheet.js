@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useContext, useEffect } from "react";
 const _ = require("lodash");
 
@@ -125,48 +124,35 @@ const CharacterSheet = ({ character }) => {
 
   return (
     <>
-      {/* --- Page Header --- */}
-      <header className="max-w-lg mx-auto mb-8">
-        {/* TFTL LOGO */}
-        <Image
-          src="/img/tftl-logo.png"
-          alt="Tales From The Loop logo"
-          width={800}
-          height={136}
-        />
-      </header>
-
       {/* --- Page Main Content --- */}
-      <main>
-        <div className="grid lg:grid-cols-3 gap-4">
-          {/* --- Left Column --- */}
-          <div className="lg:col-span-1 order-2 lg:order-1">
-            <Attributes />
-            <Conditions />
-            <Skills />
-            <Experience />
-          </div>
-          {/* --- Right Column --- */}
-          <div className="lg:col-span-2 order-1 lg:order-2">
-            <MainInfo />
-            <Relationships />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-              <Items />
-              <Hideout />
-            </div>
-            <Notes />
-          </div>
+      <div className="grid lg:grid-cols-3 gap-4">
+        {/* --- Left Column --- */}
+        <div className="lg:col-span-1 order-2 lg:order-1">
+          <Attributes />
+          <Conditions />
+          <Skills />
+          <Experience />
         </div>
-        {/* Separation line */}
-        <div className="h-px my-6 bg-gray-300"></div>
-        {/* Submit button */}
-        <button
-          className="bg-orange-400 text-white py-3 font-bold w-full"
-          onClick={handleSubmit}
-        >
-          Submit
-        </button>
-      </main>
+        {/* --- Right Column --- */}
+        <div className="lg:col-span-2 order-1 lg:order-2">
+          <MainInfo />
+          <Relationships />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <Items />
+            <Hideout />
+          </div>
+          <Notes />
+        </div>
+      </div>
+      {/* Separation line */}
+      <div className="h-px my-6 bg-gray-300"></div>
+      {/* Submit button */}
+      <button
+        className="bg-orange-400 text-white py-3 font-bold w-full"
+        onClick={handleSubmit}
+      >
+        Submit
+      </button>
     </>
   );
 };
