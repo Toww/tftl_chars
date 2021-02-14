@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import { useRouter } from "next/router";
 const _ = require("lodash");
 
 // UI Components
@@ -78,11 +79,89 @@ const CharacterSheet = ({ character }) => {
       setPride(character.mainInfo.pride);
       setDescription(character.mainInfo.description);
       setFavSong(character.mainInfo.favSong);
+    } else {
+      // If no character was passed as props, set every context back to default value.
+      // (in case another character sheet was opened before and context was set)
+      setAttributes([
+        { title: "Body", type: "body", value: 0 },
+        { title: "Tech", type: "tech", value: 0 },
+        { title: "Heart", type: "heart", value: 0 },
+        { title: "Mind", type: "mind", value: 0 },
+      ]);
+      setConditions([
+        { title: "Upset", type: "upset", value: 0 },
+        { title: "Scared", type: "scared", value: 0 },
+        { title: "Exhausted", type: "exhausted", value: 0 },
+        { title: "Injured", type: "injured", value: 0 },
+        { title: "Broken", type: "broken", value: 0 },
+      ]);
+      setSkills([
+        { title: "Sneak (Body)", type: "sneak", value: 0 },
+        { title: "Force (Body)", type: "force", value: 0 },
+        { title: "Move (Body)", type: "move", value: 0 },
+        { title: "Tinker (Tech)", type: "tinker", value: 0 },
+        { title: "Program (Tech)", type: "program", value: 0 },
+        { title: "Calculate (Tech)", type: "calculate", value: 0 },
+        { title: "Contact (Heart)", type: "contact", value: 0 },
+        { title: "Charm (Heart)", type: "charm", value: 0 },
+        { title: "Lead (Heart)", type: "lead", value: 0 },
+        { title: "Investigate (Mind)", type: "investigate", value: 0 },
+        { title: "Comprehend (Mind)", type: "comprehend", value: 0 },
+        { title: "Empathize (Mind)", type: "empathize", value: 0 },
+      ]);
+      setExperience([
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+      ]);
+      setRelationships([
+        { title: "Kid 1", value: "" },
+        { title: "Kid 2", value: "" },
+        { title: "Kid 3", value: "" },
+        { title: "Kid 4", value: "" },
+        { title: "NPC 1", value: "" },
+        { title: "NPC 2", value: "" },
+      ]);
+      setItems([
+        { title: "", bonus: "+2" },
+        { title: "", bonus: "" },
+        { title: "", bonus: "" },
+        { title: "", bonus: "" },
+        { title: "", bonus: "" },
+        { title: "", bonus: "" },
+      ]);
+      setHideout("");
+      setNotes("");
+      setName("");
+      setType("");
+      setAge("");
+      setLuckPoints([
+        false,
+        false,
+        false,
+        false,
+        false,
+      ]);
+      setDrive("");
+      setAnchor("");
+      setProblem("");
+      setPride(({ text: "", checked: false }));
+      setDescription("");
+      setFavSong("");
     }
   }, []);
 
+  // Preparing the router for redirection to homepage after data submission
+  const router = useRouter();
   // Submitting the character sheet form
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // Character object grouping all data from contexts
     const charNewInfo = {
       attributes,
@@ -119,6 +198,15 @@ const CharacterSheet = ({ character }) => {
       charValuesChanged
         ? console.log("Sending updated char to db!")
         : console.log("No modifications were made to the character sheet");
+    } else {
+      const res = await fetch("/api/characters/", {
+        method: "POST",
+        body: JSON.stringify(charNewInfo),
+        headers: { "Content-Type": "application/json" },
+      });
+      console.log("Char added!");
+      // After character is added to database, redirect to homepage
+      router.push("/");
     }
   };
 
@@ -148,10 +236,10 @@ const CharacterSheet = ({ character }) => {
       <div className="h-px my-6 bg-gray-300"></div>
       {/* Submit button */}
       <button
-        className="bg-orange-400 text-white py-3 font-bold w-full"
+        className="bg-orange-400 text-white px-5 rounded-md py-3 font-bold"
         onClick={handleSubmit}
       >
-        Submit
+        {character ? "Update Character" : "Create Character"}
       </button>
     </>
   );
