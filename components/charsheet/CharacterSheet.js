@@ -142,17 +142,11 @@ const CharacterSheet = ({ character }) => {
       setName("");
       setType("");
       setAge("");
-      setLuckPoints([
-        false,
-        false,
-        false,
-        false,
-        false,
-      ]);
+      setLuckPoints([false, false, false, false, false]);
       setDrive("");
       setAnchor("");
       setProblem("");
-      setPride(({ text: "", checked: false }));
+      setPride({ text: "", checked: false });
       setDescription("");
       setFavSong("");
     }
@@ -188,26 +182,43 @@ const CharacterSheet = ({ character }) => {
 
     // If a Character was passed as prop
     if (character) {
-      // If there is a character passed as a prop, add its id to charNewInfo and check it
-      charNewInfo._id = character._id;
-
       // Comparing the two objects using lodash to see if any modification
       // was made on the character sheet since it was loaded from db.
       const charValuesChanged = !_.isEqual(character, charNewInfo);
 
-      charValuesChanged
-        ? console.log("Sending updated char to db!")
-        : console.log("No modifications were made to the character sheet");
+      // if the character sheet was modified, we update it in db and go back to homepage.
+      // Else log an error message.
+      if (charValuesChanged) {
+        await fetch(`/api/character/${character._id}`, {
+          method: "PUT",
+          body: JSON.stringify(charNewInfo),
+          headers: { "Content-Type": "application/json" },
+        });
+        // After character is updated in database, redirect to homepage
+        router.push("/");
+      } else {
+        console.log("No modifications were made to the character sheet");
+      }
     } else {
-      const res = await fetch("/api/characters/", {
+      // If no character was passed as a prop,
+      // create new character in database
+      await fetch("/api/characters/", {
         method: "POST",
         body: JSON.stringify(charNewInfo),
         headers: { "Content-Type": "application/json" },
       });
-      console.log("Char added!");
       // After character is added to database, redirect to homepage
       router.push("/");
     }
+  };
+
+  const handleDelete = async () => {
+    // Deleting character sheet in db
+    await fetch(`/api/character/${character._id}`, {
+      method: "DELETE",
+    });
+    // After character is deleted in db, redirect to homepage
+    router.push("/");
   };
 
   return (
@@ -234,13 +245,22 @@ const CharacterSheet = ({ character }) => {
       </div>
       {/* Separation line */}
       <div className="h-px my-6 bg-gray-300"></div>
-      {/* Submit button */}
+      {/* Submit button (update / create character) */}
       <button
         className="bg-orange-400 text-white px-5 rounded-md py-3 font-bold"
         onClick={handleSubmit}
       >
         {character ? "Update Character" : "Create Character"}
       </button>
+      {/* Delete button */}
+      {character && (
+        <button
+          onClick={handleDelete}
+          className="ml-2 bg-red-500 text-white rounded-md py-3 px-5 font-bold"
+        >
+          Delete character
+        </button>
+      )}
     </>
   );
 };
