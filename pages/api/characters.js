@@ -14,7 +14,6 @@ export const getAllCharactersFromDb = async () => {
 // Function to add a new character to db
 const addChartoDb = async (charObject) => {
   const { db } = await connectToDatabase();
-  console.log(charObject);
   const result = await db.collection("characters").insertOne(charObject);
   return result;
 };

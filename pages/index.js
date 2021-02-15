@@ -1,20 +1,21 @@
-import Head from "next/head";
-import CharacterSheet from "components/charsheet/CharacterSheet";
+import Link from "next/link";
+import Layout from "components/Layout";
+import CharactersList from "components/CharactersList";
+import { getAllCharactersFromDb } from "pages/api/characters";
 
 // Use to get character from database
-import { getCharFromDb } from "pages/api/character/[id]";
-
-export default function Home({ character }) {
+export default function Home({ characters }) {
   return (
     <div>
-      <Head>
-        <title>Tales From The Loop Characters</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        <CharacterSheet character={character} />
-      </main>
+      <Layout title={Home}>
+        <h1 className="text-xl font-bold">Characters</h1>
+        <CharactersList characters={characters} />
+        <Link href="/character/new">
+            <a className="block mt-4 w-max bg-orange-400 text-white py-3 px-4 font-bold rounded-md">
+              Create new character
+            </a>
+        </Link>
+      </Layout>
     </div>
   );
 }
@@ -22,11 +23,11 @@ export default function Home({ character }) {
 // On every request to this page :
 export async function getServerSideProps() {
   // get the corresponding character from db
-  const character = await getCharFromDb("601c3a1fbd74cddeccf9f1a7");
+  const characters = await getAllCharactersFromDb();
   // Pass data to the page via props
   return {
     props: {
-      character,
+      characters,
     },
   };
 }

@@ -4,7 +4,7 @@ export const ExperienceContext = createContext();
 
 const ExperienceContextProvider = ({ children }) => {
   const [experience, setExperience] = useState([
-    true,
+    false,
     false,
     false,
     false,

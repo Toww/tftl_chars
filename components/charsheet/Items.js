@@ -19,7 +19,7 @@ const Items = () => {
 
   return (
     <div className="info-block mb-0">
-      <h1 className="block-title">Items - {Math.random()}</h1>
+      <h1 className="block-title">Items</h1>
       <ul className="c-list">
         {items.map((item, index) => (
           <li
